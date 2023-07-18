@@ -224,6 +224,7 @@ const ModalizeBase = (
   const handleAnimateOpen = (
     alwaysOpenValue: number | undefined,
     dest: TOpen = 'default',
+    isInitialOpen: boolean = false,
   ): void => {
     const { timing, spring } = openAnimationConfig;
 
@@ -244,8 +245,12 @@ const ModalizeBase = (
       toValue = (modalHeightValue || 0) - snapPoint;
     }
 
-    if (panGestureAnimatedValue && (alwaysOpenValue || snapPoint)) {
+
+    if (panGestureAnimatedValue && (alwaysOpenValue || snapPoint) && isInitialOpen) {
       toPanValue = 0;
+    }
+    else if (panGestureAnimatedValue && (alwaysOpenValue || snapPoint)) {
+      toPanValue = 1;
     } else if (
       panGestureAnimatedValue &&
       !alwaysOpenValue &&
@@ -858,7 +863,7 @@ const ModalizeBase = (
 
   React.useEffect(() => {
     if (alwaysOpen && (modalHeightValue || adjustToContentHeight)) {
-      handleAnimateOpen(alwaysOpen);
+      handleAnimateOpen(alwaysOpen, 'default', true);
     }
   }, [alwaysOpen, modalHeightValue]);
 
