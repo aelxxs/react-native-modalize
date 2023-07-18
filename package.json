@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./lib/* && yarn lint && tsc",
+    "build": "tsc",
     "prepare": "yarn build",
     "lint": "eslint 'src/**/*.ts?(x)' && prettier --list-different \"**/*.{json,md,js,jsx,ts,tsx}\"",
     "prettier": "prettier --write \"{docs,examples,src}/**/*.{json,md,js,jsx,ts,tsx}\"",
@@ -15,6 +15,9 @@
     "watch:react-native-navigation": "concurrently \"yarn watch:modalize\" \"yarn cpx 'src/**/*' 'examples/react-native-navigation/node_modules/react-native-modalize' --watch\"",
     "watch:react-navigation": "concurrently \"yarn watch:modalize\" \"yarn cpx 'src/**/*' 'examples/react-navigation/node_modules/react-native-modalize' --watch\""
   },
+  "files": [
+    "lib/**/*"
+  ],
   "keywords": [
     "react-native",
     "react",
